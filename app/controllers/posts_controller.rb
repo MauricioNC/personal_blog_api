@@ -27,9 +27,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def tag
+    posts = Post.find_by_tags([ params[:tag] ])
+    render json: posts
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, tags: [])
   end
 end
